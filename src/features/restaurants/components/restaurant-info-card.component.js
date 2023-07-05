@@ -3,17 +3,28 @@ import styled from "styled-components/native";
 import { Card } from "react-native-paper";
 
 const RestaurantCard = styled(Card)`
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
-  padding: 16px;
-  background-color: white;
+  padding: ${(props) => props.theme.space[3]};
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
 const Title = styled.Text`
-  padding: 16px;
-  padding-top: 0px;
+  font-family: ${(props) => props.theme.fonts.heading};
+  font-size: ${(props) => props.theme.fontSizes.body};
+  color: ${(props) => props.theme.colors.ui.primary};
+`;
+
+const Info = styled.View`
+  padding: ${(props) => props.theme.space[3]};
+  padding-top: ${(props) => props.theme.space[0]};
+`;
+
+const Address = styled.Text`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size: ${(props) => props.theme.fontSizes.caption};
 `;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
@@ -23,7 +34,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
-    // address = "100 Some Random Street",
+    address = "100 Some Random Street",
     // isOpenNow = true,
     // rating = 4,
     // isClosedTemporarily = false,
@@ -31,7 +42,10 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   return (
     <RestaurantCard elevation={5}>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
-      <Title>{name}</Title>
+      <Info>
+        <Title>{name}</Title>
+        <Address>{address}</Address>
+      </Info>
     </RestaurantCard>
   );
 };
